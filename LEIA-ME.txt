@@ -1,0 +1,26 @@
+MEU MUNDO, MINHA VOZ — DEMONSTRAÇÃO 0.6
+
+1. GITHUB PAGES
+- Crie um repositório PÚBLICO chamado meu-mundo-minha-voz (ou outro nome).
+- Envie SOMENTE o arquivo index.html à raiz do repositório.
+- Settings > Pages > Deploy from a branch > main > / (root) > Save.
+- Acesse https://SEU_USUARIO.github.io/meu-mundo-minha-voz/
+
+2. IMPORTANTE: PRIVACIDADE
+- A demonstração usa IndexedDB local, NÃO possui cadastro real por email e senha.
+- Mesmo no GitHub Pages público, NÃO cadastre pacientes nem fotografias reais.
+- Outros usuários no mesmo navegador podem acessar os dados locais.
+- Não use o repositório para guardar senhas, fotos pessoais ou chaves privadas.
+
+3. SUPABASE (ETAPA SEGUINTE)
+- Crie um projeto Supabase separado do TO Kids PRO.
+- No SQL Editor do novo projeto, execute SUPABASE_ESTRUTURA_INICIAL.sql apenas após revisar as regras.
+- Ative Email/Password e confirmação por email; configure Site URL e Redirect URLs.
+- Teste as políticas RLS com duas contas diferentes e storage com arquivos privados.
+- NÃO ative o uso clínico real até conectarmos autenticação, gravação/leitura online, recuperação de senha, exclusão de dados e revisão de LGPD.
+
+4. ATUALIZAÇÃO LOCAL
+- Exporte um backup do protótipo antigo antes de trocar de arquivo.
+- Se abrir index.html numa pasta nova, talvez o navegador não reutilize o mesmo IndexedDB.
+
+Esta versão é uma evolução VISUAL da 0.5 e preserva funcionalidades locais; o SQL é um plano executável para a futura conexão, não indica que a conexão foi feita.
