@@ -56,16 +56,38 @@ header{background:linear-gradient(100deg,#7bcfce,#a9ddcd 47%,#f4c1d0);border-bot
 @media(max-width:920px){.hero-illustration{display:none}}
 @media(max-width:650px){.intro{padding:24px 17px!important;border-radius:23px!important}.intro h1{font-size:35px!important}.hero-pills span{font-size:11px;padding:6px 9px}.profile{width:100%}.tab{border-radius:13px!important}}
 @media(prefers-reduced-motion:reduce){.tab,.tile,.board-card,.scene-card{transition:none!important}}
+
+/* 0.7 - cadastro privado e sincronização Supabase */
+#auth-gate{max-width:500px;margin:34px auto 72px;background:#fffefd;border:2px solid #efd8e7;border-radius:28px;padding:clamp(22px,4vw,38px);box-shadow:0 16px 55px #8b5a8340}
+#auth-gate h1{font-size:clamp(28px,4vw,40px);line-height:1.17;margin:8px 0 12px;color:#805174}
+#auth-gate p{color:#705d6c;line-height:1.5}
+#auth-gate .field{width:100%;padding:13px;font-size:16px;background:white;border:1px solid #d5bfcd;border-radius:12px}
+#auth-gate label{display:block;font-weight:750;font-size:13px;margin:14px 0 5px}
+#auth-gate .auth-actions{display:flex;gap:9px;flex-wrap:wrap;margin:17px 0}
+#auth-gate .auth-tabs{display:flex;flex-wrap:wrap;gap:7px;margin:20px 0 12px}
+#auth-gate .auth-tabs button{border:1px solid #e1c9d4;padding:9px 15px;background:#fff4f9;color:#63485c;border-radius:10px;cursor:pointer}
+#auth-gate .auth-tabs button[aria-pressed=true]{background:#8d4678;color:white}
+#auth-status{padding:12px 15px;background:#f1f8f5;border-radius:12px;min-height:42px;white-space:pre-wrap}
+#auth-logout{background:#fff0f5;border-radius:9px;border:1px solid #b96693;padding:8px 13px;cursor:pointer}
+#auth-account{display:flex;align-items:center;gap:10px;flex-wrap:wrap;font-size:12px}
+#auth-gate[hidden],#app-shell[hidden],#auth-account[hidden]{display:none!important}
 </style>
 </head>
 <body>
-<header><div class="head"><div class="logo"><span class="icon" aria-hidden="true">💬</span><div>Meu Mundo, Minha Voz<div class="subtitle">Comunicação que começa na vida real</div></div></div><span class="chip">Demonstração pública • 0.6 • sem cadastro online</span></div></header>
-<main class="shell"><div role="status" style="padding:11px 17px;background:#fff4d5;border:1px solid #e9d2a4;color:#654d42;border-radius:14px;font-size:13px;margin:12px 0"><strong>🧪 Versão de demonstração gratuita.</strong> As informações ficam neste navegador; ainda não há cadastro online nem privacidade entre usuários do mesmo aparelho. Use somente dados e imagens fictícios. Estamos preparando o Supabase.</div>
+<header><div class="head"><div class="logo"><span class="icon" aria-hidden="true">💬</span><div>Meu Mundo, Minha Voz<div class="subtitle">Comunicação que começa na vida real</div></div></div><span class="chip">Contas gratuitas • 0.7 • Supabase</span><div id="auth-account" hidden><span id="auth-email"></span><button id="auth-logout" type="button">Sair da conta</button></div></div></header>
+<section id="auth-gate" aria-labelledby="auth-heading">
+<div style="font-size:31px">🌈 💬 ✨</div><h1 id="auth-heading">Seu mundo tem muito a dizer!</h1>
+<p>Entre na sua conta gratuita para criar perfis e salvar pranchas, fotografias, histórias e cenas. Cada conta acessa apenas seus próprios registros.</p>
+<div class="auth-tabs" role="group" aria-label="Tipo de acesso"><button type="button" id="auth-login-tab" aria-pressed="true">Entrar</button><button type="button" id="auth-signup-tab" aria-pressed="false">Criar conta gratuita</button><button type="button" id="auth-recover-tab" aria-pressed="false">Recuperar senha</button></div>
+<form id="auth-form"><label for="auth-email-input">E-mail</label><input class="field" type="email" id="auth-email-input" autocomplete="email" required placeholder="seuemail@exemplo.com"><div id="auth-password-area"><label for="auth-password-input">Senha</label><input class="field" type="password" id="auth-password-input" autocomplete="current-password" minlength="6" required placeholder="Sua senha"></div><div class="auth-actions"><button class="btn primary" id="auth-submit" type="submit">Entrar</button></div></form>
+<p id="auth-status" role="status" aria-live="polite">Conectando com segurança…</p><p class="tiny">Teste inicialmente com perfis e fotos fictícios. Dados de crianças exigem consentimento, procedimentos de privacidade e verificação adicional de segurança.</p>
+</section>
+<main class="shell" id="app-shell" hidden><div role="status" style="padding:11px 17px;background:#f0fbf7;border:1px solid #c2e2d6;color:#3d6257;border-radius:14px;font-size:13px;margin:12px 0"><strong>☁️ Contas conectadas ao Supabase.</strong> Perfis, pranchas, fotos, histórias e cenas são salvos na conta autenticada. Versão em testes: use somente dados fictícios até validar a privacidade com duas contas e cumprir os requisitos de proteção infantil.</div>
 <div class="intro"><div class="hero-copy"><div class="hero-kicker">🌈 COMUNICAR É PARTICIPAR</div><h1>Meu mundo tem <span class="hero-emphasis">muito a dizer<span class="sparkles"> ✨</span></span></h1><p>Fotos da vida real, palavras, histórias e muitas formas de expressão. Aqui, cada voz encontra seu jeito de florescer.</p><div class="hero-pills"><span>📸 Minhas fotos</span><span>💬 Minhas palavras</span><span>📚 Minhas histórias</span><span>🔊 Minha voz</span></div></div><div class="hero-illustration" aria-hidden="true"><div class="bloom one">🧸</div><div class="bloom two">🌼</div><div class="bloom three">💖</div><div class="speech-cloud">EU POSSO<br>ME EXPRESSAR!</div><div class="bloom four">⭐</div></div><div class="profile"><label for="profiles" class="tiny">Perfil em uso</label><select class="select" id="profiles"></select><button class="btn" id="new-profile">+ Perfil</button></div></div>
 <div class="mode-bar"><strong>Modo de uso</strong><div class="mode-switch" role="group" aria-label="Escolher modo de uso"><button type="button" class="btn teal" id="mode-therapist" aria-pressed="true">🧑‍⚕️ Terapeuta</button><button type="button" class="btn" id="mode-child" aria-pressed="false">🧒 Criança</button></div><span class="tiny" id="mode-note">O terapeuta pode cadastrar e editar conteúdos.</span></div>
 <nav class="tabs" aria-label="Áreas do aplicativo"><button class="tab" data-tab="talk" aria-selected="true">💬 Minha voz</button><button class="tab" data-tab="world" aria-selected="false">📷 Meu mundo</button><button class="tab" data-tab="boards" aria-selected="false">🗂️ Minhas pranchas</button><button class="tab" data-tab="stories" aria-selected="false">📖 Minhas histórias</button><button aria-selected="false" class="tab" data-tab="scenes">🏡 Cenas interativas</button><button class="tab" data-tab="settings" aria-selected="false">⚙️ Configurações</button></nav>
 <section id="tab-talk" class="panel"><h2>Minha voz</h2><p>Toque nas imagens para construir sua mensagem. Você pode usar palavras essenciais e fotografias da sua vida.</p><div class="builder"><div style="display:flex;align-items:center;justify-content:space-between;gap:8px;flex-wrap:wrap"><strong>Minha mensagem</strong><span class="tiny">Toque numa palavra para removê-la</span></div><div id="sentence" class="sentence" aria-live="polite"></div><div class="actions"><button class="btn primary" id="say">🔊 Falar minha mensagem</button><button class="btn" id="undo">↶ Voltar</button><button class="btn" id="clear">✕ Limpar</button></div></div><div class="toolbar"><div class="group"><label class="sr-only" for="category-filter">Categoria</label><select id="category-filter" class="select"><option value="all">Todas as categorias</option><option value="essencial">Palavras essenciais</option><option value="pessoa">Pessoas</option><option value="comida">Comidas</option><option value="objeto">Objetos</option><option value="lugar">Lugares</option><option value="acao">Ações</option><option value="outro">Outros</option></select><label class="sr-only" for="symbol-search">Buscar palavra</label><input class="field" id="symbol-search" type="search" placeholder="🔎 Buscar palavra..." aria-label="Buscar palavras e símbolos" style="max-width:240px"></div><button id="quick-add" class="btn teal therapist-only">📷 Adicionar foto</button></div><div class="visual-controls"><strong>Como mostrar as imagens?</strong><div class="view-modes" role="group" aria-label="Formato das imagens"><button class="view-mode" type="button" data-mode="photo" aria-pressed="false">📷 Fotografia</button><button class="view-mode" type="button" data-mode="both" aria-pressed="true">🔄 Foto + símbolo</button><button class="view-mode" type="button" data-mode="symbol" aria-pressed="false">🧩 Símbolo</button></div><span class="tiny">Troque de visualização a qualquer momento. As palavras e a voz permanecem disponíveis.</span></div><p class="tiny">Biblioteca inicial ampliada: 20 ou mais representações em cada categoria. Os ícones são emojis ilustrativos de demonstração, não pictogramas PECS® ou ARASAAC.</p><div id="tiles" class="tiles"></div></section>
-<section id="tab-world" class="panel hidden"><h2>Meu mundo real</h2><p>Crie uma biblioteca com fotos e palavras que fazem sentido para esta criança. Os itens são adicionados automaticamente ao comunicador.</p><div class="hint">🔒 Nesta versão, as imagens ficam somente neste navegador e dispositivo. Não são enviadas para uma nuvem. Evite usar dados identificáveis reais até definir consentimento e armazenamento seguro.</div><button class="btn primary therapist-only" id="add-photo">+ Adicionar imagem ou palavra</button><div class="hint" style="margin-top:15px">🔄 Na nova versão, cada item pode ter uma <strong>fotografia pessoal</strong> e um <strong>símbolo visual</strong> (emoji ou imagem enviada). Na aba Minha voz, alterne entre foto, símbolo ou os dois. Não há etapas obrigatórias.</div><div id="personal-tiles" class="tiles" style="margin-top:18px"></div></section>
+<section id="tab-world" class="panel hidden"><h2>Meu mundo real</h2><p>Crie uma biblioteca com fotos e palavras que fazem sentido para esta criança. Os itens são adicionados automaticamente ao comunicador.</p><div class="hint">🔒 As imagens pessoais são enviadas ao armazenamento privado do Supabase. Use apenas fotografias fictícias até concluir os testes de controle de acesso e adequação à LGPD.</div><button class="btn primary therapist-only" id="add-photo">+ Adicionar imagem ou palavra</button><div class="hint" style="margin-top:15px">🔄 Na nova versão, cada item pode ter uma <strong>fotografia pessoal</strong> e um <strong>símbolo visual</strong> (emoji ou imagem enviada). Na aba Minha voz, alterne entre foto, símbolo ou os dois. Não há etapas obrigatórias.</div><div id="personal-tiles" class="tiles" style="margin-top:18px"></div></section>
 <section id="tab-stories" class="panel hidden"><h2>Minhas histórias</h2><p>Conte acontecimentos reais, explore sentimentos e converse sobre experiências usando fotos da vida da criança.</p><button class="btn primary therapist-only" id="new-story">+ Criar história</button><div id="stories" class="story-list" style="margin-top:20px"></div><div id="story-player" class="hidden"><button class="btn" id="story-back">← Voltar às histórias</button><div class="preview"><div id="story-visual"></div><blockquote id="story-text"></blockquote><div id="story-progress" class="tiny"></div><div class="actions"><button class="btn" id="previous-page">← Anterior</button><button class="btn primary" id="read-page">🔊 Ouvir</button><button class="btn" id="next-page">Próxima →</button></div></div></div></section>
 <section class="panel hidden" id="tab-scenes">
  <h2>🏡 Cenas interativas</h2><p>Transforme uma fotografia da vida da criança em uma cena de comunicação. Crie pontos tocáveis em pessoas, objetos e ações. O toque pode falar uma mensagem e acrescentar uma palavra à frase.</p>
@@ -82,10 +104,11 @@ header{background:linear-gradient(100deg,#7bcfce,#a9ddcd 47%,#f4c1d0);border-bot
   <div id="scene-hotspot-list" class="scene-hotspot-list" data-therapist-only="true"></div>
  </div>
  </section>
-<section id="tab-boards" class="panel hidden"><h2>Minhas pranchas de comunicação</h2><p>Crie e salve diversas pranchas para o perfil selecionado. Cada perfil tem suas próprias pranchas neste navegador. Os dados não são protegidos por login; utilize somente testes fictícios.</p><div class="hint">🔒 <strong>Segurança:</strong> nesta versão, pranchas e perfis continuam salvos apenas neste navegador. Cadastro por e-mail, senha e sincronização privada exigem backend seguro e ainda não estão ativos.</div><div class="actions therapist-only"><button class="btn primary" id="new-board">＋ Criar prancha</button></div><div id="boards-list" class="boards-grid"></div><div id="board-player" class="hidden"><div class="actions" style="margin-bottom:16px"><button class="btn" id="boards-back">← Voltar às pranchas</button><button class="btn therapist-only" id="boards-edit">✏️ Editar prancha</button><button class="btn danger therapist-only" id="boards-delete">🗑 Excluir prancha</button></div><h3 id="board-title"></h3><p id="board-desc" class="tiny"></p><div id="board-tiles" class="tiles"></div><div class="builder"><strong>Minha mensagem</strong><div class="sentence" id="board-sentence"></div><div class="actions"><button class="btn primary" id="board-say">🔊 Falar mensagem</button><button class="btn" id="board-undo">↶ Voltar</button><button class="btn" id="board-clear">✕ Limpar</button></div></div></div></section>
+<section id="tab-boards" class="panel hidden"><h2>Minhas pranchas de comunicação</h2><p>Crie e salve diversas pranchas para o perfil selecionado. As pranchas são salvas no Supabase e vinculadas ao perfil selecionado dentro da sua conta. Utilize somente dados fictícios durante os testes.</p><div class="hint">☁️ <strong>Salvamento online:</strong> pranchas e perfis usam sua conta autenticada. Cadastro por e-mail, senha e sincronização privada exigem backend seguro e ainda não estão ativos.</div><div class="actions therapist-only"><button class="btn primary" id="new-board">＋ Criar prancha</button></div><div id="boards-list" class="boards-grid"></div><div id="board-player" class="hidden"><div class="actions" style="margin-bottom:16px"><button class="btn" id="boards-back">← Voltar às pranchas</button><button class="btn therapist-only" id="boards-edit">✏️ Editar prancha</button><button class="btn danger therapist-only" id="boards-delete">🗑 Excluir prancha</button></div><h3 id="board-title"></h3><p id="board-desc" class="tiny"></p><div id="board-tiles" class="tiles"></div><div class="builder"><strong>Minha mensagem</strong><div class="sentence" id="board-sentence"></div><div class="actions"><button class="btn primary" id="board-say">🔊 Falar mensagem</button><button class="btn" id="board-undo">↶ Voltar</button><button class="btn" id="board-clear">✕ Limpar</button></div></div></div></section>
 <section id="tab-settings" class="panel hidden"><h2>Configurações e segurança</h2><p>Escolha como ouvir as mensagens e gerencie os dados deste protótipo.</p><div class="hint">🎨 <strong>Biblioteca ilustrativa:</strong> os símbolos iniciais são emojis do dispositivo (não equivalem a um conjunto clínico de pictogramas). Você pode substituir cada símbolo por uma imagem de sua escolha em Meu Mundo.</div><div class="settings-grid"><div><label for="voice-select"><strong>Voz do dispositivo</strong></label><select class="select" style="display:block;width:100%;margin:9px 0" id="voice-select"><option value="">Voz padrão do navegador</option></select><label for="speech-rate">Velocidade de fala: <span id="rate-label">0,9×</span></label><input type="range" id="speech-rate" min="0.6" max="1.2" step="0.1" value="0.9" style="width:100%"><button id="test-voice" class="btn" style="margin-top:10px">🔊 Testar a voz</button></div><div class="stat"><strong id="item-count">0</strong> imagens/palavras pessoais <span class="tiny">neste perfil</span><hr style="border:0;border-top:1px solid #dbc8b9"><strong id="story-count">0</strong> histórias <span class="tiny">neste perfil</span></div></div><div style="margin-top:20px" class="hint">A voz desta versão usa a síntese de fala disponível no dispositivo. A voz natural de IA como a Thaís requer conexão com um serviço específico, permissões e infraestrutura de proteção dos dados. Não está integrada nesta versão.</div><div class="actions"><button id="export-data" class="btn">⬇️ Exportar dados (JSON)</button><label class="btn" for="import-data">⬆️ Importar dados<input class="sr-only" type="file" id="import-data" accept="application/json,.json"></label><button id="delete-profile" class="btn danger">🗑 Excluir perfil atual</button></div><p class="tiny" style="margin-top:15px">Dados armazenados localmente usando IndexedDB. Limpar os dados do navegador pode apagá-los. Faça exportações de segurança regularmente. Para uso clínico, o app precisa de avaliação de acessibilidade, segurança e fluxos assistenciais específicos.</p></section>
 </main><div class="footer">Protótipo independente • Comunicação Aumentativa e Alternativa • Acesso à comunicação não exige etapas ou pré-requisitos obrigatórios. Este recurso não substitui avaliação individualizada nem treinamento com profissionais de CAA.</div>
 <div id="modal" class="modal hidden" role="dialog" aria-modal="true" aria-labelledby="modal-title"><div class="dialog"><h2 id="modal-title">Adicionar imagem</h2><div id="modal-content"></div><div class="buttons"><button class="btn" id="cancel-modal">Cancelar</button><button class="btn primary" id="save-modal">Salvar</button></div></div></div>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
 <script>
 'use strict';
 const $=id=>document.getElementById(id);const CATS={essencial:'Palavras essenciais',pessoa:'Pessoas',comida:'Comidas',objeto:'Objetos',lugar:'Lugares',acao:'Ações',outro:'Outros'};
@@ -95,13 +118,74 @@ const BUILTIN=[...DEFAULTS,...EXPANDED_SYMBOLS.filter(n=>!DEFAULTS.some(d=>d.cat
 const state={db:null,profiles:[],current:null,items:[],stories:[],scenes:[],boards:[],currentBoard:null,sceneTokens:[],currentScene:null,sceneEditing:false,lastSceneMessage:"",phrase:[],tab:'talk',activeStory:null,page:0,voices:[],viewMode:localStorage.getItem('mmmv-view-mode')||'both',userMode:localStorage.getItem('mmmv-user-mode')==='child'?'child':'therapist'};
 function makeId(){return globalThis.crypto?.randomUUID?.()||'k'+Date.now().toString(36)+Math.random().toString(36).slice(2)}
 function esc(v){return String(v).replace(/[&<>"']/g,x=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[x]))}
-function waitTx(tx){return new Promise((resolve,reject)=>{tx.oncomplete=()=>resolve();tx.onerror=()=>reject(tx.error);tx.onabort=()=>reject(tx.error)})}
-function store(s,mode='readonly'){return state.db.transaction(s,mode).objectStore(s)}
-async function all(s){return new Promise((resolve,reject)=>{let q=store(s).getAll();q.onsuccess=()=>resolve(q.result);q.onerror=()=>reject(q.error)})}
-async function put(s,obj){let tx=state.db.transaction(s,'readwrite');tx.objectStore(s).put(obj);return waitTx(tx)}
-async function del(s,key){let tx=state.db.transaction(s,'readwrite');tx.objectStore(s).delete(key);return waitTx(tx)}
-async function initDB(){state.db=await new Promise((resolve,reject)=>{let r=indexedDB.open('meu-mundo-minha-voz-v1',3);r.onupgradeneeded=()=>{let db=r.result;if(!db.objectStoreNames.contains('profiles'))db.createObjectStore('profiles',{keyPath:'id'});if(!db.objectStoreNames.contains('items'))db.createObjectStore('items',{keyPath:'id'});if(!db.objectStoreNames.contains('stories'))db.createObjectStore('stories',{keyPath:'id'});if(!db.objectStoreNames.contains('scenes'))db.createObjectStore('scenes',{keyPath:'id'});if(!db.objectStoreNames.contains('boards'))db.createObjectStore('boards',{keyPath:'id'})};r.onsuccess=()=>resolve(r.result);r.onerror=()=>reject(r.error)});let ps=await all('profiles');if(!ps.length){let p={id:makeId(),name:'Perfil de demonstração'};await put('profiles',p);ps=[p]}state.profiles=ps;state.current=localStorage.getItem('mmmv-profile');if(!ps.some(p=>p.id===state.current))state.current=ps[0].id;await loadProfile()}
-async function loadProfile(){state.items=(await all('items')).filter(x=>x.profileId===state.current);state.stories=(await all('stories')).filter(x=>x.profileId===state.current);state.scenes=(await all('scenes')).filter(x=>x.profileId===state.current);state.boards=(await all('boards')).filter(x=>x.profileId===state.current);state.currentBoard=null;state.currentScene=null;state.sceneEditing=false;state.sceneTokens=[];state.phrase=[];state.activeStory=null;state.page=0;localStorage.setItem('mmmv-profile',state.current);$('profiles').replaceChildren(...state.profiles.map(p=>new Option(p.name,p.id)));$('profiles').value=state.current;render()}
+/* Nuvem: somente chave pública; todo acesso usa sessão autenticada + RLS */
+const CLOUD_URL='https://qdwpvicoapnzoahseblv.supabase.co';
+const CLOUD_PUBLISHABLE_KEY='sb_publishable_mvimV0_dhoueOXvj1C6-yg_AZD_ZTYV';
+let cloud=null, activeUser=null;
+const imagePaths=new Map(), imageCache=new Map();
+const cloudTables={profiles:'mmv_children',items:'mmv_vocabulary',stories:'mmv_stories',scenes:'mmv_scenes',boards:'mmv_boards'};
+function mustAuth(){if(!cloud||!activeUser)throw Error('Entre na sua conta para acessar os dados.');return activeUser.id}
+function check(result){if(result.error)throw new Error(result.error.message);return result.data}
+async function saveImage(img,childId){
+ if(!img)return null;
+ if(!img.startsWith('data:'))return img;
+ if(imagePaths.has(img))return imagePaths.get(img);
+ mustAuth();const blob=await (await fetch(img)).blob();
+ if(blob.size>5242880)throw Error('Imagem acima do limite de 5 MB. Escolha uma foto menor.');
+ const format=blob.type==='image/png'?'png':blob.type==='image/webp'?'webp':'jpg';
+ const path=activeUser.id+'/'+childId+'/'+crypto.randomUUID()+'.'+format;
+ check(await cloud.storage.from('mmv-private').upload(path,blob,{contentType:blob.type,upsert:false}));
+ imagePaths.set(img,path);imageCache.set(path,img);return path;
+}
+async function loadImage(path){
+ if(!path)return null;
+ if(path.startsWith('data:'))return path;
+ if(imageCache.has(path))return imageCache.get(path);
+ const blob=check(await cloud.storage.from('mmv-private').download(path));
+ const data=await new Promise((resolve,reject)=>{const r=new FileReader();r.onload=()=>resolve(r.result);r.onerror=()=>reject(r.error);r.readAsDataURL(blob)});
+ imagePaths.set(data,path);imageCache.set(path,data);return data;
+}
+async function encodePages(pages,childId){let output=[];for(const p of pages||[]){output.push({...p,image:p.image?await saveImage(p.image,childId):null})}return output}
+async function decodePages(pages){let output=[];for(const p of pages||[]){output.push({...p,image:p.image?await loadImage(p.image):null})}return output}
+async function all(type){
+ mustAuth();let rows=check(await cloud.from(cloudTables[type]).select('*').order('created_at',{ascending:true}));
+ if(type==='profiles')return rows.map(r=>({id:r.id,name:r.display_name}));
+ if(type==='boards')return rows.map(r=>({id:r.id,profileId:r.child_id,title:r.title,description:r.content?.description||'',columns:r.content?.columns||3,wordIds:r.content?.wordIds||[],updatedAt:r.updated_at}));
+ if(type==='items')return await Promise.all(rows.map(async r=>{let meta={};try{meta=JSON.parse(r.symbol||'{}')}catch{meta={emoji:r.symbol||'🖼️'}};return {id:r.id,profileId:r.child_id,name:r.label,category:r.category||'outro',emoji:meta.emoji||'🖼️',spoken:meta.spoken||r.label,image:await loadImage(r.image_path),symbolImage:await loadImage(meta.symbolImagePath)}}));
+ if(type==='stories')return await Promise.all(rows.map(async r=>({id:r.id,profileId:r.child_id,title:r.title,pages:await decodePages(r.pages)})));
+ if(type==='scenes')return await Promise.all(rows.map(async r=>({id:r.id,profileId:r.child_id,title:r.title,image:await loadImage(r.image_path),hotspots:r.hotspots||[]})));
+ return [];
+}
+async function put(type,obj){
+ mustAuth();let row;
+ if(type==='profiles')row={id:obj.id,user_id:activeUser.id,display_name:obj.name};
+ if(type==='boards')row={id:obj.id,user_id:activeUser.id,child_id:obj.profileId,title:obj.title,content:{description:obj.description,columns:obj.columns,wordIds:obj.wordIds},updated_at:new Date().toISOString()};
+ if(type==='items')row={id:obj.id,user_id:activeUser.id,child_id:obj.profileId,label:obj.name,category:obj.category||'outro',image_path:await saveImage(obj.image,obj.profileId),symbol:JSON.stringify({emoji:obj.emoji||'🖼️',spoken:obj.spoken||obj.name,symbolImagePath:await saveImage(obj.symbolImage,obj.profileId)})};
+ if(type==='stories')row={id:obj.id,user_id:activeUser.id,child_id:obj.profileId,title:obj.title,pages:await encodePages(obj.pages,obj.profileId)};
+ if(type==='scenes')row={id:obj.id,user_id:activeUser.id,child_id:obj.profileId,title:obj.title,image_path:await saveImage(obj.image,obj.profileId),hotspots:obj.hotspots||[]};
+ check(await cloud.from(cloudTables[type]).upsert(row,{onConflict:'id'}));
+}
+async function del(type,id){mustAuth();check(await cloud.from(cloudTables[type]).delete().eq('id',id))}
+async function initDB(){
+ mustAuth();let ps=await all('profiles');
+ if(!ps.length){let p={id:makeId(),name:'Perfil de demonstração'};await put('profiles',p);ps=[p]}
+ state.profiles=ps;
+ const currentKey='mmmv-profile-'+activeUser.id;
+ state.current=localStorage.getItem(currentKey);
+ if(!ps.some(p=>p.id===state.current))state.current=ps[0].id;
+ await loadProfile();
+}
+async function loadProfile(){
+ mustAuth();
+ state.items=(await all('items')).filter(x=>x.profileId===state.current);
+ state.stories=(await all('stories')).filter(x=>x.profileId===state.current);
+ state.scenes=(await all('scenes')).filter(x=>x.profileId===state.current);
+ state.boards=(await all('boards')).filter(x=>x.profileId===state.current);
+ state.currentBoard=null;state.currentScene=null;state.sceneEditing=false;state.sceneTokens=[];state.phrase=[];state.activeStory=null;state.page=0;
+ localStorage.setItem('mmmv-profile-'+activeUser.id,state.current);
+ $('profiles').replaceChildren(...state.profiles.map(p=>new Option(p.name,p.id)));
+ $('profiles').value=state.current;render();
+}
 function words(){return BUILTIN.concat(state.items,state.sceneTokens)}
 function representationHtml(item,mode='both'){
  const photo=item.image?'<img class="representation-photo" src="'+esc(item.image)+'" alt="">':'<span class="illustration placeholder-photo" aria-hidden="true">📷</span>';
@@ -228,8 +312,67 @@ function createScene(sc){const html='<div class="form-grid"><label class="wide">
  let rec={id:sc?.id||makeId(),profileId:state.current,title,image:photo||sc.image,hotspots:sc?.hotspots||[]};await put('scenes',rec);state.scenes=state.scenes.filter(x=>x.id!==rec.id).concat(rec);state.currentScene=rec;
  $('scene-player').classList.remove('hidden');$('scenes-list').classList.add('hidden');$('new-scene').classList.add('hidden');state.sceneEditing=!sc;renderActiveScene();return true})}
 
-function bind(){$('mode-therapist').onclick=()=>setUserMode('therapist');$('mode-child').onclick=()=>setUserMode('child');$('symbol-search').oninput=renderTiles;document.querySelectorAll('.tab').forEach(x=>x.onclick=()=>showTab(x.dataset.tab));document.querySelectorAll('.view-mode').forEach(x=>x.onclick=()=>{state.viewMode=x.dataset.mode;localStorage.setItem('mmmv-view-mode',state.viewMode);renderPhrase();renderTiles();document.querySelectorAll('.view-mode').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.mode===state.viewMode)))});$('profiles').onchange=async e=>{state.current=e.target.value;await loadProfile()};$('new-profile').onclick=addProfile;$('category-filter').onchange=renderTiles;$('say').onclick=()=>speak(state.phrase.map(id=>words().find(x=>x.id===id)?.spoken||words().find(x=>x.id===id)?.name).filter(Boolean).join(' '));$('undo').onclick=()=>{state.phrase.pop();renderPhrase()};$('clear').onclick=()=>{state.phrase=[];renderPhrase()};$('quick-add').onclick=$('add-photo').onclick=()=>openItem(null);$('new-story').onclick=makeStory;$('new-scene').onclick=()=>createScene(null);$('scenes-back').onclick=returnScenes;$('toggle-scene-edit').onclick=()=>{state.sceneEditing=!state.sceneEditing;renderActiveScene()};$('scene-photo').onclick=scenePoint;$('edit-scene-info').onclick=()=>{if(state.currentScene)createScene(state.currentScene)};$('delete-scene').onclick=async()=>{if(!state.currentScene||!confirm('Excluir esta cena e todos os seus pontos?'))return;await del('scenes',state.currentScene.id);state.scenes=state.scenes.filter(x=>x.id!==state.currentScene.id);returnScenes()};$('scene-say-phrase').onclick=()=>speak(state.phrase.map(id=>words().find(x=>x.id===id)?.spoken||words().find(x=>x.id===id)?.name).filter(Boolean).join(' '));$('scene-undo').onclick=()=>{state.phrase.pop();renderScenePhrase()};$('scene-clear').onclick=()=>{state.phrase=[];renderScenePhrase()};$('scene-reset-voice').onclick=()=>speak(state.lastSceneMessage);$('story-back').onclick=()=>{state.activeStory=null;renderStories()};$('previous-page').onclick=()=>{if(state.page>0){state.page--;renderPage()}};$('next-page').onclick=()=>{if(state.page<state.activeStory.pages.length-1){state.page++;renderPage()}};$('read-page').onclick=()=>speak(state.activeStory.pages[state.page].text);$('cancel-modal').onclick=closeModal;$('modal').addEventListener('click',e=>{if(e.target===$('modal'))closeModal()});$('test-voice').onclick=()=>speak('Olá! Este é o Meu Mundo, Minha Voz. Eu tenho muito a dizer.');$('speech-rate').oninput=e=>$('rate-label').textContent=Number(e.target.value).toFixed(1).replace('.',',')+'×';$('export-data').onclick=()=>download(JSON.stringify({app:'Meu Mundo Minha Voz',version:'0.5',profile:state.profiles.find(p=>p.id===state.current),items:state.items,stories:state.stories,scenes:state.scenes,boards:state.boards,exportedAt:new Date().toISOString()},null,2),'meu-mundo-minha-voz-backup.json');$('import-data').onchange=async e=>{let f=e.target.files[0];if(!f)return;try{let data=JSON.parse(await f.text());if(data.app!=='Meu Mundo Minha Voz'||!Array.isArray(data.items)||!Array.isArray(data.stories))throw Error('Backup não reconhecido.');if(!confirm('Importar itens e histórias deste backup para o perfil atual?'))return;for(let x of data.items){if(typeof x.name!=='string'||typeof x.category!=='string')continue;await put('items',{...x,id:makeId(),profileId:state.current})}for(let s of data.stories){if(!Array.isArray(s.pages)||typeof s.title!=='string')continue;await put('stories',{...s,id:makeId(),profileId:state.current})}for(let c of (Array.isArray(data.scenes)?data.scenes:[])){if(typeof c.title!=='string'||typeof c.image!=='string'||!Array.isArray(c.hotspots))continue;await put('scenes',{...c,id:makeId(),profileId:state.current})}for(let b of (Array.isArray(data.boards)?data.boards:[])){if(typeof b.title!=='string'||!Array.isArray(b.wordIds))continue;await put('boards',{...b,id:makeId(),profileId:state.current,wordIds:b.wordIds.filter(id=>typeof id==='string').slice(0,150)})}await loadProfile();alert('Backup importado.')}catch(err){alert('Erro ao importar: '+err.message)}finally{e.target.value=''}};$('delete-profile').onclick=deleteProfile;bindBoards();if('speechSynthesis'in window){speechSynthesis.onvoiceschanged=loadVoices;loadVoices()}}
-(async()=>{try{bind();await initDB()}catch(e){document.querySelector('main').prepend(element('<div class="hint">Este navegador bloqueou o armazenamento local. Abra o arquivo em Chrome ou Firefox e permita armazenamento do site.</div>'));console.error(e)}})();
+function bind(){$('mode-therapist').onclick=()=>setUserMode('therapist');$('mode-child').onclick=()=>setUserMode('child');$('symbol-search').oninput=renderTiles;document.querySelectorAll('.tab').forEach(x=>x.onclick=()=>showTab(x.dataset.tab));document.querySelectorAll('.view-mode').forEach(x=>x.onclick=()=>{state.viewMode=x.dataset.mode;localStorage.setItem('mmmv-view-mode',state.viewMode);renderPhrase();renderTiles();document.querySelectorAll('.view-mode').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.mode===state.viewMode)))});$('profiles').onchange=async e=>{state.current=e.target.value;await loadProfile()};$('new-profile').onclick=addProfile;$('category-filter').onchange=renderTiles;$('say').onclick=()=>speak(state.phrase.map(id=>words().find(x=>x.id===id)?.spoken||words().find(x=>x.id===id)?.name).filter(Boolean).join(' '));$('undo').onclick=()=>{state.phrase.pop();renderPhrase()};$('clear').onclick=()=>{state.phrase=[];renderPhrase()};$('quick-add').onclick=$('add-photo').onclick=()=>openItem(null);$('new-story').onclick=makeStory;$('new-scene').onclick=()=>createScene(null);$('scenes-back').onclick=returnScenes;$('toggle-scene-edit').onclick=()=>{state.sceneEditing=!state.sceneEditing;renderActiveScene()};$('scene-photo').onclick=scenePoint;$('edit-scene-info').onclick=()=>{if(state.currentScene)createScene(state.currentScene)};$('delete-scene').onclick=async()=>{if(!state.currentScene||!confirm('Excluir esta cena e todos os seus pontos?'))return;await del('scenes',state.currentScene.id);state.scenes=state.scenes.filter(x=>x.id!==state.currentScene.id);returnScenes()};$('scene-say-phrase').onclick=()=>speak(state.phrase.map(id=>words().find(x=>x.id===id)?.spoken||words().find(x=>x.id===id)?.name).filter(Boolean).join(' '));$('scene-undo').onclick=()=>{state.phrase.pop();renderScenePhrase()};$('scene-clear').onclick=()=>{state.phrase=[];renderScenePhrase()};$('scene-reset-voice').onclick=()=>speak(state.lastSceneMessage);$('story-back').onclick=()=>{state.activeStory=null;renderStories()};$('previous-page').onclick=()=>{if(state.page>0){state.page--;renderPage()}};$('next-page').onclick=()=>{if(state.page<state.activeStory.pages.length-1){state.page++;renderPage()}};$('read-page').onclick=()=>speak(state.activeStory.pages[state.page].text);$('cancel-modal').onclick=closeModal;$('modal').addEventListener('click',e=>{if(e.target===$('modal'))closeModal()});$('test-voice').onclick=()=>speak('Olá! Este é o Meu Mundo, Minha Voz. Eu tenho muito a dizer.');$('speech-rate').oninput=e=>$('rate-label').textContent=Number(e.target.value).toFixed(1).replace('.',',')+'×';$('export-data').onclick=()=>download(JSON.stringify({app:'Meu Mundo Minha Voz',version:'0.7',profile:state.profiles.find(p=>p.id===state.current),items:state.items,stories:state.stories,scenes:state.scenes,boards:state.boards,exportedAt:new Date().toISOString()},null,2),'meu-mundo-minha-voz-backup.json');$('import-data').onchange=async e=>{let f=e.target.files[0];if(!f)return;try{let data=JSON.parse(await f.text());if(data.app!=='Meu Mundo Minha Voz'||!Array.isArray(data.items)||!Array.isArray(data.stories))throw Error('Backup não reconhecido.');if(!confirm('Importar itens e histórias deste backup para o perfil atual?'))return;for(let x of data.items){if(typeof x.name!=='string'||typeof x.category!=='string')continue;await put('items',{...x,id:makeId(),profileId:state.current})}for(let s of data.stories){if(!Array.isArray(s.pages)||typeof s.title!=='string')continue;await put('stories',{...s,id:makeId(),profileId:state.current})}for(let c of (Array.isArray(data.scenes)?data.scenes:[])){if(typeof c.title!=='string'||typeof c.image!=='string'||!Array.isArray(c.hotspots))continue;await put('scenes',{...c,id:makeId(),profileId:state.current})}for(let b of (Array.isArray(data.boards)?data.boards:[])){if(typeof b.title!=='string'||!Array.isArray(b.wordIds))continue;await put('boards',{...b,id:makeId(),profileId:state.current,wordIds:b.wordIds.filter(id=>typeof id==='string').slice(0,150)})}await loadProfile();alert('Backup importado.')}catch(err){alert('Erro ao importar: '+err.message)}finally{e.target.value=''}};$('delete-profile').onclick=deleteProfile;bindBoards();if('speechSynthesis'in window){speechSynthesis.onvoiceschanged=loadVoices;loadVoices()}}
+
+let authMode='login',cloudBooting=false;
+function authNotice(msg){$('auth-status').textContent=msg}
+function setAuthMode(mode){
+ authMode=mode;
+ for(const v of ['login','signup','recover'])$('auth-'+v+'-tab').setAttribute('aria-pressed',String(v===mode));
+ $('auth-password-area').hidden=(mode==='recover');
+ $('auth-password-input').required=(mode!=='recover');
+ $('auth-password-input').autocomplete=mode==='signup'?'new-password':'current-password';
+ $('auth-submit').textContent=mode==='login'?'Entrar':mode==='signup'?'Criar conta grátis':'Enviar recuperação';
+ authNotice('Use um e-mail válido. Não compartilhe sua senha.');
+}
+async function showLoggedIn(user){
+ if(cloudBooting)return;cloudBooting=true;
+ try{
+  activeUser=user;$('auth-email').textContent=user.email||'Conta conectada';
+  $('auth-account').hidden=false;$('auth-gate').hidden=true;$('app-shell').hidden=false;
+  await initDB();
+ }catch(e){$('app-shell').hidden=true;$('auth-gate').hidden=false;authNotice('Erro ao carregar seus dados: '+e.message);console.error(e)}
+ finally{cloudBooting=false}
+}
+function showLoggedOut(){activeUser=null;state.profiles=[];state.items=[];state.stories=[];state.scenes=[];state.boards=[];state.current=null;state.currentBoard=null;state.currentScene=null;state.phrase=[];$('app-shell').hidden=true;$('auth-account').hidden=true;$('auth-gate').hidden=false;authNotice('Entre ou crie uma conta gratuita.');}
+async function bootCloud(){
+ bind();
+ for(const mode of ['login','signup','recover'])$('auth-'+mode+'-tab').onclick=()=>setAuthMode(mode);
+ if(!window.supabase){authNotice('Não foi possível carregar o Supabase. Verifique sua conexão e atualize a página.');return}
+ cloud=window.supabase.createClient(CLOUD_URL,CLOUD_PUBLISHABLE_KEY,{auth:{persistSession:true,autoRefreshToken:true,detectSessionInUrl:true}});
+ $('auth-logout').onclick=async()=>{try{check(await cloud.auth.signOut());showLoggedOut()}catch(e){alert(e.message)}};
+ $('auth-form').onsubmit=async ev=>{
+  ev.preventDefault();const email=$('auth-email-input').value.trim(),password=$('auth-password-input').value;
+  $('auth-submit').disabled=true;authNotice('Verificando…');
+  try{
+   if(authMode==='signup'){
+    const ret=await cloud.auth.signUp({email,password,options:{emailRedirectTo:window.location.origin+window.location.pathname}});
+    check(ret);if(ret.data.session){await showLoggedIn(ret.data.user)}else authNotice('Cadastro solicitado. Confira seu e-mail, inclusive a caixa de spam, e clique no link de confirmação. Depois volte para entrar.');
+   }else if(authMode==='recover'){
+    check(await cloud.auth.resetPasswordForEmail(email,{redirectTo:window.location.origin+window.location.pathname}));
+    authNotice('Se o e-mail estiver cadastrado, você receberá instruções de recuperação. Confira a caixa de entrada e o spam.');
+   }else{
+    const ret=await cloud.auth.signInWithPassword({email,password});check(ret);
+    await showLoggedIn(ret.data.user);
+   }
+  }catch(e){authNotice('Não foi possível concluir: '+e.message)}
+  finally{$('auth-submit').disabled=false}
+ };
+ cloud.auth.onAuthStateChange((ev,session)=>{
+  if(ev==='SIGNED_OUT'){showLoggedOut()}
+  if(ev==='PASSWORD_RECOVERY')setTimeout(async()=>{
+   let newPass=prompt('Crie sua nova senha (mínimo de 8 caracteres):');if(!newPass)return;
+   if(newPass.length<8){alert('A senha deve ter pelo menos 8 caracteres.');return}
+   const out=await cloud.auth.updateUser({password:newPass});
+   alert(out.error?'Não foi possível alterar a senha: '+out.error.message:'Senha alterada. Você já pode entrar.');
+  },0);
+ });
+ try{const ret=await cloud.auth.getSession();check(ret);
+  if(ret.data.session?.user)await showLoggedIn(ret.data.session.user);else showLoggedOut();
+ }catch(e){authNotice('Falha na conexão com o serviço: '+e.message)}
+}
+bootCloud();
+
 </script>
 </body>
 </html>
