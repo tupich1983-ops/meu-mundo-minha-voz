@@ -71,10 +71,24 @@ header{background:linear-gradient(100deg,#7bcfce,#a9ddcd 47%,#f4c1d0);border-bot
 #auth-logout{background:#fff0f5;border-radius:9px;border:1px solid #b96693;padding:8px 13px;cursor:pointer}
 #auth-account{display:flex;align-items:center;gap:10px;flex-wrap:wrap;font-size:12px}
 #auth-gate[hidden],#app-shell[hidden],#auth-account[hidden]{display:none!important}
+
+/* Apresentação institucional do criador — versão 0.7.1 */
+.about-creator{max-width:1180px;margin:24px auto 20px;padding:0 20px}
+.creator-card{background:linear-gradient(130deg,#fff4e8 0%,#f9e9f0 55%,#e9f7f4 100%);border:1px solid #e4cbd7;border-radius:25px;padding:clamp(22px,4vw,38px);box-shadow:0 10px 28px #57382e0b;position:relative;overflow:hidden}
+.creator-card:after{content:'✦';position:absolute;right:18px;top:-35px;font-size:155px;color:#e6a6b8;opacity:.20;pointer-events:none}
+.creator-kicker{font-weight:800;text-transform:uppercase;font-size:11px;letter-spacing:.18em;color:#825477;margin:0 0 10px}
+.creator-card h2{font-family:Georgia,serif;font-size:clamp(27px,3.5vw,39px);font-weight:600;color:#57382e;margin:0 0 15px}
+.creator-card p{font-size:15px;line-height:1.7;max-width:880px;margin:0 0 13px;color:#514641;position:relative;z-index:1}
+.creator-tags{display:flex;flex-wrap:wrap;gap:8px;margin:19px 0}
+.creator-tags span{display:inline-block;background:#fff9f4;border:1px solid #e8d4d3;border-radius:99px;padding:7px 12px;font-size:12px;font-weight:650;color:#684d4b}
+.creator-links{display:flex;gap:10px;flex-wrap:wrap;position:relative;z-index:1}
+.creator-links a{display:inline-flex;align-items:center;justify-content:center;padding:10px 15px;min-height:44px;border-radius:12px;background:#57382e;color:#fff8f0;font-weight:750;font-size:13px;text-decoration:none}
+.creator-links a.outline{background:#fffaf6;color:#57382e;border:1px solid #b98b70}
+.creator-links a:focus-visible{outline:3px solid #218e8a;outline-offset:3px}
 </style>
 </head>
 <body>
-<header><div class="head"><div class="logo"><span class="icon" aria-hidden="true">💬</span><div>Meu Mundo, Minha Voz<div class="subtitle">Comunicação que começa na vida real</div></div></div><span class="chip">Contas gratuitas • 0.7 • Supabase</span><div id="auth-account" hidden><span id="auth-email"></span><button id="auth-logout" type="button">Sair da conta</button></div></div></header>
+<header><div class="head"><div class="logo"><span class="icon" aria-hidden="true">💬</span><div>Meu Mundo, Minha Voz<div class="subtitle">Comunicação que começa na vida real</div></div></div><span class="chip">Contas gratuitas • 0.7.1 • Supabase</span><div id="auth-account" hidden><span id="auth-email"></span><button id="auth-logout" type="button">Sair da conta</button></div></div></header>
 <section id="auth-gate" aria-labelledby="auth-heading">
 <div style="font-size:31px">🌈 💬 ✨</div><h1 id="auth-heading">Seu mundo tem muito a dizer!</h1>
 <p>Entre na sua conta gratuita para criar perfis e salvar pranchas, fotografias, histórias e cenas. Cada conta acessa apenas seus próprios registros.</p>
@@ -106,7 +120,19 @@ header{background:linear-gradient(100deg,#7bcfce,#a9ddcd 47%,#f4c1d0);border-bot
  </section>
 <section id="tab-boards" class="panel hidden"><h2>Minhas pranchas de comunicação</h2><p>Crie e salve diversas pranchas para o perfil selecionado. As pranchas são salvas no Supabase e vinculadas ao perfil selecionado dentro da sua conta. Utilize somente dados fictícios durante os testes.</p><div class="hint">☁️ <strong>Salvamento online:</strong> pranchas e perfis usam sua conta autenticada. Cadastro por e-mail, senha e sincronização privada exigem backend seguro e ainda não estão ativos.</div><div class="actions therapist-only"><button class="btn primary" id="new-board">＋ Criar prancha</button></div><div id="boards-list" class="boards-grid"></div><div id="board-player" class="hidden"><div class="actions" style="margin-bottom:16px"><button class="btn" id="boards-back">← Voltar às pranchas</button><button class="btn therapist-only" id="boards-edit">✏️ Editar prancha</button><button class="btn danger therapist-only" id="boards-delete">🗑 Excluir prancha</button></div><h3 id="board-title"></h3><p id="board-desc" class="tiny"></p><div id="board-tiles" class="tiles"></div><div class="builder"><strong>Minha mensagem</strong><div class="sentence" id="board-sentence"></div><div class="actions"><button class="btn primary" id="board-say">🔊 Falar mensagem</button><button class="btn" id="board-undo">↶ Voltar</button><button class="btn" id="board-clear">✕ Limpar</button></div></div></div></section>
 <section id="tab-settings" class="panel hidden"><h2>Configurações e segurança</h2><p>Escolha como ouvir as mensagens e gerencie os dados deste protótipo.</p><div class="hint">🎨 <strong>Biblioteca ilustrativa:</strong> os símbolos iniciais são emojis do dispositivo (não equivalem a um conjunto clínico de pictogramas). Você pode substituir cada símbolo por uma imagem de sua escolha em Meu Mundo.</div><div class="settings-grid"><div><label for="voice-select"><strong>Voz do dispositivo</strong></label><select class="select" style="display:block;width:100%;margin:9px 0" id="voice-select"><option value="">Voz padrão do navegador</option></select><label for="speech-rate">Velocidade de fala: <span id="rate-label">0,9×</span></label><input type="range" id="speech-rate" min="0.6" max="1.2" step="0.1" value="0.9" style="width:100%"><button id="test-voice" class="btn" style="margin-top:10px">🔊 Testar a voz</button></div><div class="stat"><strong id="item-count">0</strong> imagens/palavras pessoais <span class="tiny">neste perfil</span><hr style="border:0;border-top:1px solid #dbc8b9"><strong id="story-count">0</strong> histórias <span class="tiny">neste perfil</span></div></div><div style="margin-top:20px" class="hint">A voz desta versão usa a síntese de fala disponível no dispositivo. A voz natural de IA como a Thaís requer conexão com um serviço específico, permissões e infraestrutura de proteção dos dados. Não está integrada nesta versão.</div><div class="actions"><button id="export-data" class="btn">⬇️ Exportar dados (JSON)</button><label class="btn" for="import-data">⬆️ Importar dados<input class="sr-only" type="file" id="import-data" accept="application/json,.json"></label><button id="delete-profile" class="btn danger">🗑 Excluir perfil atual</button></div><p class="tiny" style="margin-top:15px">Dados armazenados localmente usando IndexedDB. Limpar os dados do navegador pode apagá-los. Faça exportações de segurança regularmente. Para uso clínico, o app precisa de avaliação de acessibilidade, segurança e fluxos assistenciais específicos.</p></section>
-</main><div class="footer">Protótipo independente • Comunicação Aumentativa e Alternativa • Acesso à comunicação não exige etapas ou pré-requisitos obrigatórios. Este recurso não substitui avaliação individualizada nem treinamento com profissionais de CAA.</div>
+</main>
+<section class="about-creator" aria-labelledby="creator-title">
+ <div class="creator-card">
+  <p class="creator-kicker">💗 Quem criou este espaço</p>
+  <h2 id="creator-title">Sobre o Criador</h2>
+  <p><strong>Guilherme Augusto Buss Tupich</strong> é terapeuta ocupacional, psicoterapeuta corporal, professor e pesquisador. Sua trajetória reúne Terapia Ocupacional, desenvolvimento humano, educação, dança e inclusão.</p>
+  <p>O <strong>Meu Mundo, Minha Voz</strong> nasceu do desejo de aproximar a Comunicação Aumentativa e Alternativa da vida cotidiana: as pessoas que a criança conhece, seus lugares, seus objetos preferidos, suas histórias e tudo aquilo que ela tem a dizer.</p>
+  <p>A proposta é oferecer um recurso gratuito e acessível para profissionais e famílias ampliarem oportunidades de comunicação, escolha e participação, respeitando diferentes modos de expressão. Cada pessoa tem sua história — e toda voz merece espaço.</p>
+  <div class="creator-tags" aria-label="Formação e atuação"><span>🎓 Terapeuta Ocupacional</span><span>🔬 Mestre em Ciências da Saúde</span><span>🎭 Arte e inclusão</span><span>CREFITO-8 9199/TO</span></div>
+  <div class="creator-links"><a href="https://guilhermetupich.com.br/" target="_blank" rel="noopener noreferrer">🌐 Conheça o criador</a><a class="outline" href="https://www.instagram.com/guitupich/" target="_blank" rel="noopener noreferrer">📷 Instagram @guitupich</a><a class="outline" href="mailto:tupich1983@gmail.com">✉️ Contato</a></div>
+ </div>
+</section>
+<div class="footer">Protótipo independente • Comunicação Aumentativa e Alternativa • Acesso à comunicação não exige etapas ou pré-requisitos obrigatórios. Este recurso não substitui avaliação individualizada nem treinamento com profissionais de CAA.</div>
 <div id="modal" class="modal hidden" role="dialog" aria-modal="true" aria-labelledby="modal-title"><div class="dialog"><h2 id="modal-title">Adicionar imagem</h2><div id="modal-content"></div><div class="buttons"><button class="btn" id="cancel-modal">Cancelar</button><button class="btn primary" id="save-modal">Salvar</button></div></div></div>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
 <script>
